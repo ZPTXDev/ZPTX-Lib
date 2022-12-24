@@ -4,7 +4,9 @@
   "type": "module",
   "description": "Library for ZPTX projects, containing shared functions used across all projects",
   "main": "dist/index.js",
-  "files": ["dist/**"],
+  "files": [
+    "dist/**"
+  ],
   "scripts": {
     "build": "rimraf dist/ && tsc",
     "test": "jest --coverage"
