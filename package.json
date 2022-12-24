@@ -4,11 +4,10 @@
   "type": "module",
   "description": "Library for ZPTX projects, containing shared functions used across all projects",
   "main": "dist/index.js",
-  "files": ["dist/*"],
+  "files": ["dist/**"],
   "scripts": {
     "build": "rimraf dist/ && tsc",
-    "test": "jest --coverage",
-    "postversion": "ls && cp -r package.json dist && cp -r npm-shrinkwrap.json dist"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -46,12 +45,7 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      [
-        "@semantic-release/npm",
-        {
-          "pkgRoot": "dist/"
-        }
-      ],
+      "@semantic-release/npm",
       [
         "@semantic-release/git",
         {
