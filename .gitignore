@@ -1,12 +1,6 @@
 # Ignore compiled JavaScript files
 dist/
 
-# Ignore TypeScript declaration files
-*.d.ts
-
-# Ignore TypeScript configuration files
-tsconfig.json
-
 # Ignore node modules
 node_modules/
 
