@@ -13,7 +13,7 @@
   "scripts": {
     "build": "rimraf dist/ && tsc",
     "test": "jest --coverage",
-    "postversion": "tsc"
+    "postversion": "npm i && tsc"
   },
   "repository": {
     "type": "git",
