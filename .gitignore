@@ -9,3 +9,6 @@ tsconfig.json
 
 # Ignore node modules
 node_modules/
+
+# Ignore code coverage
+coverage/
