@@ -1,4 +1,4 @@
-import { TimeFormats, TimeObject } from 'types/index.js';
+import type { TimeFormats, TimeObject } from 'types/index.js';
 
 /**
  * Returns a time object (or a converted equivalent if a format is provided) converted from milliseconds.
