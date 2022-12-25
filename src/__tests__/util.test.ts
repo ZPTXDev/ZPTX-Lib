@@ -6,7 +6,7 @@ import {
     paginate,
     parseTimeString,
     roundTo,
-} from '../index.js';
+} from '../util.js';
 
 describe('msToTime function', (): void => {
     test('converts milliseconds to a time object', (): void => {
