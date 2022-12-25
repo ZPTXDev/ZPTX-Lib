@@ -1,12 +1,12 @@
 {
   "name": "@zptxdev/zptx-lib",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "@zptxdev/zptx-lib",
-      "version": "1.0.5",
+      "version": "1.0.6",
       "license": "GPL-3.0",
       "devDependencies": {
         "@types/jest": "^29.2.4",
