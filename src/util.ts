@@ -47,6 +47,11 @@ export function msToTime(
  * @param simple - Whether to return a simple string or a more detailed one.
  * @returns The converted string.
  */
+export function msToTimeString(msObject: TimeObject, simple?: false): string;
+export function msToTimeString(
+    msObject: TimeObject,
+    simple: true,
+): string | 'MORE_THAN_A_DAY';
 export function msToTimeString(
     msObject: TimeObject,
     simple?: boolean,
