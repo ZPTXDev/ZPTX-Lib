@@ -1,6 +1,6 @@
 {
   "name": "@zptxdev/zptx-lib",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
   "description": "Library for ZPTX projects, containing shared functions used across all projects",
   "publishConfig": {
