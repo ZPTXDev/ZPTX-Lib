@@ -5,6 +5,9 @@
     <a href="https://www.npmjs.com/package/@zptxdev/zptx-lib">
         <img alt="npm (scoped)" src="https://img.shields.io/npm/v/@zptxdev/zptx-lib?style=flat-square&color=cc0000">
     </a>
+    <a href="https://www.npmjs.com/package/@zptxdev/zptx-lib">
+        <img alt="npm (scoped)" src="https://img.shields.io/npm/v/@zptxdev/zptx-lib/next?style=flat-square&color=cc0000">
+    </a>
 </p>
 <p align="center">
     <a href="https://www.codefactor.io/repository/github/zptxdev/zptx-lib/overview/master">
