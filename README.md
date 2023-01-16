@@ -1,7 +1,6 @@
 <h1 align="center" style="border-bottom: none;">ZPTX-Lib</h1>
 <h3 align="center">Library for ZPTX projects, containing shared functions used across all projects</h3>
 <p align="center">
-    <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/ZPTXDev/ZPTX-Lib?style=flat-square">
     <a href="https://www.npmjs.com/package/@zptxdev/zptx-lib">
         <img alt="npm (scoped)" src="https://img.shields.io/npm/v/@zptxdev/zptx-lib?style=flat-square&color=cc0000">
     </a>
