@@ -1,4 +1,7 @@
+import { resolve } from 'path';
+import { fileURLToPath } from 'url';
 import {
+    getAbsoluteFileURL,
     getBar,
     getJSONResponse,
     msToTime,
@@ -234,5 +237,22 @@ describe('getJSONResponse function', (): void => {
     test('getJSONResponse should throw an error for invalid JSON', async (): Promise<void> => {
         const body = '{"a": 1, b: 2}';
         await expect(getJSONResponse(body)).rejects.toThrow();
+    });
+});
+
+describe('getAbsoluteFileURL function', (): void => {
+    it('should return a valid file URL', (): void => {
+        const baseURL = import.meta.url;
+        const path = ['..', 'testfile.js'];
+        const absoluteURL = getAbsoluteFileURL(baseURL, path);
+        expect(absoluteURL).toBeInstanceOf(URL);
+    });
+
+    it('should return the correct file path', (): void => {
+        const baseURL = import.meta.url;
+        const path = ['..', 'testfile.js'];
+        const absoluteURL = getAbsoluteFileURL(baseURL, path);
+        const expectedPath = resolve('src', path[1]);
+        expect(fileURLToPath(absoluteURL)).toBe(expectedPath);
     });
 });

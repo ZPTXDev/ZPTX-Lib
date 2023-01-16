@@ -1,3 +1,6 @@
+import { dirname, resolve } from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
+
 export type TimeFormats = 's' | 'm' | 'h' | 'd';
 
 export type TimeObject = {
@@ -185,4 +188,15 @@ export async function getJSONResponse(body: any): Promise<unknown> {
         fullBody += d.toString();
     }
     return JSON.parse(fullBody);
+}
+
+/**
+ * Returns an absolute file URL, readable by the ESM loader.
+ * @param baseURL - The base URL of the module.
+ * @param path - The path to the target file.
+ * @returns The absolute file URL.
+ */
+export function getAbsoluteFileURL(baseURL: string, path: string[]): URL {
+    const __dirname = dirname(fileURLToPath(baseURL));
+    return pathToFileURL(resolve(__dirname, ...path));
 }
