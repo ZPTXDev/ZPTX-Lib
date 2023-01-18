@@ -47,6 +47,8 @@ jobs:
           repository-name: ZPTXDev/docs
           target-folder: ${{ github.event.repository.name }}${{ github.ref_name == 'master' && '' || format('/{0}', github.ref_name) }}
           commit-message: 'docs: update docs for ${{ github.event.repository.name }}${{ github.ref_name == ''master'' && '''' || format(''/{0}'', github.ref_name) }}'
+          git-config-name: zptx-bot
+          git-config-email: bot@zptx.dev
   semantic-release:
     name: Semantic Release
     if: github.event_name == 'push' && github.repository_owner == 'ZPTXDev'
