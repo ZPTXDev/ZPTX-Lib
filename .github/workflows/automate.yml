@@ -45,10 +45,11 @@ jobs:
           token: ${{ secrets.PUSH_TO_PROTECTED_BRANCH }}
           folder: docs
           repository-name: ZPTXDev/docs
-          target-folder: ${{ github.event.repository.name }}${{ github.ref_name == 'master' && '' || format('/{0}', github.ref_name) }}
-          commit-message: 'docs: update docs for ${{ github.event.repository.name }}${{ github.ref_name == ''master'' && '''' || format(''/{0}'', github.ref_name) }}'
+          target-folder: ${{ github.event.repository.name }}${{ github.ref_name != 'master' && format('/{0}', github.ref_name) || '' }}
+          commit-message: 'docs: update docs for ${{ github.event.repository.name }}/${{ github.ref_name }}'
           git-config-name: zptx-bot
           git-config-email: bot@zptx.dev
+          clean: false
   semantic-release:
     name: Semantic Release
     if: github.event_name == 'push' && github.repository_owner == 'ZPTXDev'
