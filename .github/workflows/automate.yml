@@ -1,7 +1,7 @@
 name: 'General Automation'
 on:
   push:
-    branches: [ master, next ]
+    branches: [master, next]
   pull_request_target:
     branches: next
 
@@ -19,12 +19,34 @@ jobs:
       - id: metadata
         uses: dependabot/fetch-metadata@v1.3.5
         with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
       - if: steps.metadata.outputs.update-type != 'version-update:semver-major'
         run: gh pr review --approve "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GITHUB_TOKEN: ${{ secrets.PUSH_TO_PROTECTED_BRANCH }}
+  publish-docs:
+    name: Publish Docs
+    if: github.event_name == 'push' && github.repository_owner == 'ZPTXDev'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PUSH_TO_PROTECTED_BRANCH }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npx typedoc src/index.ts
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.PUSH_TO_PROTECTED_BRANCH }}
+          folder: docs
+          repository-name: ZPTXDev/docs
+          target-folder: ${{ github.event.repository.name }}/${{ github.ref_name }}
+          commit-message: 'docs: update docs for ${{ github.event.repository.name }}/${{ github.ref_name }}'
   semantic-release:
     name: Semantic Release
     if: github.event_name == 'push' && github.repository_owner == 'ZPTXDev'
