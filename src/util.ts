@@ -1,8 +1,17 @@
 import { dirname, resolve } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 
+/**
+ * Accepted time formats for the msToTime function.
+ * @see {@link msToTime}
+ */
 export type TimeFormats = 's' | 'm' | 'h' | 'd';
 
+/**
+ * A time object, returned by the msToTime function and used by the msToTimeString function.
+ * @see {@link msToTime}
+ * @see {@link msToTimeString}
+ */
 export type TimeObject = {
     d: number;
     h: number;
@@ -12,7 +21,22 @@ export type TimeObject = {
 
 /**
  * Returns a time object (or a converted equivalent if a format is provided) converted from milliseconds.
- * Reference: https://gist.github.com/flangofas/714f401b63a1c3d84aaa
+ * @see {@link https://gist.github.com/flangofas/714f401b63a1c3d84aaa Reference}
+ * @example
+ * // { d: 2, h: 3, m: 4, s: 5 }
+ * msToTime(1000 * 60 * 60 * 24 * 2 + 1000 * 60 * 60 * 3 + 1000 * 60 * 4 + 1000 * 5 + 6)
+ * @example
+ * // 2
+ * msToTime(1000 * 60 * 60 * 24 * 2 + 1000 * 60 * 60 * 3 + 1000 * 60 * 4 + 1000 * 5 + 6, 'd')
+ * @example
+ * // 51
+ * msToTime(1000 * 60 * 60 * 24 * 2 + 1000 * 60 * 60 * 3 + 1000 * 60 * 4 + 1000 * 5 + 6, 'h')
+ * @example
+ * // 3064
+ * msToTime(1000 * 60 * 60 * 24 * 2 + 1000 * 60 * 60 * 3 + 1000 * 60 * 4 + 1000 * 5 + 6, 'm')
+ * @example
+ * // 183845
+ * msToTime(1000 * 60 * 60 * 24 * 2 + 1000 * 60 * 60 * 3 + 1000 * 60 * 4 + 1000 * 5 + 6, 's')
  * @param milliseconds - The milliseconds to convert.
  * @param format - The format to convert to. Accepts 's' for seconds, 'm' for minutes, 'h' for hours, 'd' for days.
  * @returns TimeObject or the converted equivalent if a format is provided.
@@ -46,6 +70,21 @@ export function msToTime(
 
 /**
  * Returns a TimeObject in string format.
+ * @example
+ * // 2 days, 3 hrs, 4 mins, 5 secs
+ * msToTimeString({ d: 2, h: 3, m: 4, s: 5 })
+ * @example
+ * // MORE_THAN_A_DAY
+ * msToTimeString({ d: 2, h: 3, m: 4, s: 5 }, true)
+ * @example
+ * // 2:03:04
+ * msToTimeString({ d: 0, h: 2, m: 3, s: 4 }, true)
+ * @example
+ * // 3:04
+ * msToTimeString({ d: 0, h: 0, m: 3, s: 4 }, true)
+ * @example
+ * // 0:04
+ * msToTimeString({ d: 0, h: 0, m: 0, s: 4 }, true)
  * @param msObject - The TimeObject.
  * @param simple - Whether to return a simple string or a more detailed one.
  * @returns The converted string.
@@ -90,6 +129,18 @@ export function msToTimeString(
 
 /**
  * Parses a human-readable time string into milliseconds.
+ * @example
+ * // 1000
+ * parseTimeString('1s')
+ * @example
+ * // 61000
+ * parseTimeString('1m1s')
+ * @example
+ * // 3661000
+ * parseTimeString('1h 1m 1s')
+ * @example
+ * // 1000
+ * parseTimeString('foo 1s bar')
  * @param timeString - The time string to parse.
  * @returns The parsed milliseconds.
  */
@@ -120,7 +171,13 @@ export function parseTimeString(timeString: string): number {
 
 /**
  * Returns a number rounded to the number of decimal places provided.
- * Reference: https://stackoverflow.com/a/15762794
+ * @see {@link https://stackoverflow.com/a/15762794 Reference}
+ * @example
+ * // 1.234
+ * roundTo(1.23456, 3)
+ * @example
+ * // 1
+ * roundTo(1.23456, 0)
  * @param n - The number to round.
  * @param digits - The number of decimal places to round to.
  * @returns The rounded number.
@@ -142,6 +199,12 @@ export function roundTo(n: number, digits?: number): number {
 
 /**
  * Returns a progress bar based on the percentage provided.
+ * @example
+ * // 🔘▬▬▬▬▬▬▬▬▬
+ * getBar(0)
+ * @example
+ * // ▬▬▬▬▬▬🔘▬▬▬
+ * getBar(60)
  * @param progress - The percentage of the bar to be filled.
  * @returns The progress bar.
  */
@@ -166,6 +229,9 @@ export function getBar(progress: number): string {
 
 /**
  * Returns a paginated array.
+ * @example
+ * // [[1, 2], [3, 4], [5]]
+ * paginate([1, 2, 3, 4, 5], 2)
  * @param arr - The array to paginate.
  * @param size - The size of each page.
  * @returns The paginated array.
@@ -192,6 +258,9 @@ export async function getJSONResponse(body: any): Promise<unknown> {
 
 /**
  * Returns an absolute file URL, readable by the ESM loader.
+ * @example
+ * // file:///absolute/path/to/src/index.js
+ * getAbsoluteFileURL(import.meta.url, ['src', 'index.js'])
  * @param baseURL - The base URL of the module.
  * @param path - The path to the target file.
  * @returns The absolute file URL.
