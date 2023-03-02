@@ -145,25 +145,29 @@ export function msToTimeString(
  * @returns The parsed milliseconds.
  */
 export function parseTimeString(timeString: string): number {
-    const timeRegex = /(\d+)([smhd])/g;
-    const timeMatches = timeString.matchAll(timeRegex);
     let time = 0;
-    for (const match of timeMatches) {
-        const amount = parseInt(match[1]);
-        const unit = match[2];
-        switch (unit) {
-            case 's':
-                time += amount * 1000;
-                break;
-            case 'm':
-                time += amount * 1000 * 60;
-                break;
-            case 'h':
-                time += amount * 1000 * 60 * 60;
-                break;
-            case 'd':
-                time += amount * 1000 * 60 * 60 * 24;
-                break;
+    let currentNumber = '';
+    for (let i = 0; i < timeString.length; i++) {
+        const currentChar = timeString[i];
+        if (/\d/.test(currentChar)) {
+            currentNumber += currentChar;
+        } else if (currentNumber !== '') {
+            const amount = parseInt(currentNumber);
+            switch (currentChar) {
+                case 's':
+                    time += amount * 1000;
+                    break;
+                case 'm':
+                    time += amount * 1000 * 60;
+                    break;
+                case 'h':
+                    time += amount * 1000 * 60 * 60;
+                    break;
+                case 'd':
+                    time += amount * 1000 * 60 * 60 * 24;
+                    break;
+            }
+            currentNumber = '';
         }
     }
     return time;
